@@ -1,16 +1,16 @@
 version: '3.9'
 
 services:
-  postgresql:
+  some-name:
     image: postgres
-    container_name: avtoria
+    container_name: some-name
     ports:
-      - "5434:5433"
+      - "5434:5432"
     environment:
       POSTGRES_HOST: localhost
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
-      POSTGRES_DATABASE: avtoria
+      POSTGRES_DB: avtoria
     command: postgres
     restart: always
 
