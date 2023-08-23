@@ -5,7 +5,7 @@ services:
     image: postgres
     container_name: avtoria
     ports:
-      - "5432:5432"
+      - "5434:5433"
     environment:
       POSTGRES_HOST: localhost
       POSTGRES_USER: user
