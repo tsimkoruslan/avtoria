@@ -20,4 +20,11 @@ export class UserService {
     dto.password = await this.hashPassword(dto.password);
     return await this.userRepository.create({ ...dto });
   }
+
+  async publicUser(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      attributes: { exclude: ['password'] },
+    });
+  }
 }
