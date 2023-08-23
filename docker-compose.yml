@@ -10,12 +10,12 @@ services:
       POSTGRES_HOST: localhost
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
-      POSTGRES_DB: crypto
+      POSTGRES_DB: avtoria
     command: postgres
     restart: always
 
   redis:
     image: redis:alpine3.14
-    container_name: redis-crypto
+    container_name: redis-avtoria
     ports:
       - "6379:6379"
