@@ -19,7 +19,7 @@ export class AuthController {
 
   @ApiResponse({ status: 200, type: AuthUserResponse })
   @Post('login')
-  login(@Body() dto: UserLoginDTO): Promise<UserLoginDTO> {
+  login(@Body() dto: UserLoginDTO): Promise<AuthUserResponse> {
     return this.authService.loginUser(dto);
   }
 
