@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -8,8 +6,8 @@ import configurations from '../../configurations';
 import { User } from '../user/models/user.model';
 import { AuthModule } from '../auth/auth.module';
 import { TokenModule } from '../token/token.module';
-import { WatchlistModule } from '../wathlist/watchlist.module';
-import { Watchlist } from '../wathlist/models/watchlist.model';
+import { CarListModule } from '../car.list/car.list.module';
+import { CarList } from '../car.list/models/carlist.model';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,15 +26,13 @@ import { Watchlist } from '../wathlist/models/watchlist.model';
         database: configService.get('db_name'),
         synchronize: true,
         autoLoadModels: true,
-        models: [User, Watchlist],
+        models: [User, CarList],
       }),
     }),
     UserModule,
     AuthModule,
     TokenModule,
-    WatchlistModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    CarListModule,
+  ]
 })
 export class AppModule {}

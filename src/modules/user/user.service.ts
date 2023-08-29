@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO, UpdateUserDTO } from './dto';
-import { Watchlist } from '../wathlist/models/watchlist.model';
+import { CarList } from '../car.list/models/carlist.model';
 @Injectable()
 export class UserService {
   constructor(
@@ -40,7 +40,7 @@ export class UserService {
         where: { email },
         attributes: { exclude: ['password'] },
         include: {
-          model: Watchlist,
+          model: CarList,
           required: false,
         },
       });
