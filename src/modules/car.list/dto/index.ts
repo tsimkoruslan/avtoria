@@ -3,10 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { currencyEnum } from '../enum/currency.enum';
 import { BrandEnum } from '../enum/brand.enum';
 
+
 export class CarlistDTO {
-  @ApiProperty()
-  @IsString()
-  carId: string;
 
   @ApiProperty(
     {
@@ -16,6 +14,11 @@ export class CarlistDTO {
   )
   @IsEnum(BrandEnum)
   car: BrandEnum;
+
+
+  @ApiProperty()
+  @IsString()
+  description: string
 
   @ApiProperty()
   @IsEnum(currencyEnum)

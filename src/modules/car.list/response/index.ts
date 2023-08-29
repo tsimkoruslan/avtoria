@@ -23,4 +23,10 @@ export class CreateCarResponse {
   @ApiProperty()
   @IsString()
   carId: string;
+
+
+  @ApiProperty()
+  @IsString()
+  description: string;
+
 }

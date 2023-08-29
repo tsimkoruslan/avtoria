@@ -8,6 +8,7 @@ import { AuthModule } from '../auth/auth.module';
 import { TokenModule } from '../token/token.module';
 import { CarListModule } from '../car.list/car.list.module';
 import { CarList } from '../car.list/models/carlist.model';
+import { ProfanityValidationPipe } from '../../validation.pipe/profanity.validation.pipe';
 @Module({
   imports: [
     ConfigModule.forRoot({

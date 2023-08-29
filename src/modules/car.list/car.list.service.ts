@@ -18,6 +18,7 @@ export class CarListService {
         currency: dto.currency,
         price: dto.price,
         carId: dto.carId,
+        description: dto.description
       };
       await this.CarListRepository.create(carlist);
       return carlist;

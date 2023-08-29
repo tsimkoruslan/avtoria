@@ -16,7 +16,7 @@ export class User extends Model {
   @Column({ type: 'varchar' })
   password: string;
 
-  @Column({type: ENUM('roleEnum') })
+  @Column({type:ENUM(...Object.values(roleEnum))})
   role: roleEnum
 
   @HasMany(() => CarList, {

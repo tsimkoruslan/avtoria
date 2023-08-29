@@ -1,4 +1,4 @@
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, ForeignKey, Model,  Table } from 'sequelize-typescript';
 import { User } from '../../user/models/user.model';
 import { currencyEnum } from '../enum/currency.enum';
 import { BrandEnum } from '../enum/brand.enum';
@@ -9,15 +9,16 @@ export class CarList extends Model {
   @ForeignKey(() => User)
   user: User;
 
-  @Column({type: ENUM('BrandEnum')})
+  @Column({type: ENUM(...Object.values(BrandEnum))})
   car: BrandEnum;
 
-  @Column({type: ENUM('currencyEnum')})
+  @Column({type: 'varchar'})
+  description: string
+
+  @Column({type: ENUM(...Object.values(currencyEnum))})
   currency: currencyEnum;
 
   @Column({ type: 'int' })
   price: number
 
-  @Column({ type: 'varchar' })
-  carId: string;
 }
