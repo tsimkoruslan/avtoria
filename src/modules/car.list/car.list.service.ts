@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CarList} from './models/carlist.model';
+
+import { CarList } from './carlist.model';
 import { CreateCarResponse } from './response';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class CarListService {
         currency: dto.currency,
         price: dto.price,
         carId: dto.carId,
-        description: dto.description
+        description: dto.description,
       };
       await this.CarListRepository.create(carlist);
       return carlist;

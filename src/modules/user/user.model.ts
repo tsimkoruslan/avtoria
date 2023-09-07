@@ -1,12 +1,11 @@
-import { Column, HasMany, Model, Table } from 'sequelize-typescript';
-import { CarList } from '../../car.list/models/carlist.model';
-import { roleEnum } from '../enum/role.enum';
 import { ENUM } from 'sequelize';
+import { Column, HasMany, Model, Table } from 'sequelize-typescript';
 
+import { CarList } from '../car.list/carlist.model';
+import { roleEnum } from './enum/role.enum';
 
 @Table
 export class User extends Model {
-
   @Column({ type: 'varchar' })
   userName: string;
 
@@ -16,8 +15,8 @@ export class User extends Model {
   @Column({ type: 'varchar' })
   password: string;
 
-  @Column({type:ENUM(...Object.values(roleEnum))})
-  role: roleEnum
+  @Column({ type: ENUM(...Object.values(roleEnum)) })
+  role: roleEnum;
 
   @HasMany(() => CarList, {
     onDelete: 'CASCADE',

@@ -5,14 +5,14 @@ import {
   Post,
   Query,
   Req,
-  UseGuards, UsePipes,
+  UseGuards,
 } from '@nestjs/common';
-import { CarListService } from './car.list.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CarlistDTO } from './dto';
+
 import { JwtAuthGuard } from '../../guards/jwt-guard';
+import { CarlistDTO } from './car.list.dto';
+import { CarListService } from './car.list.service';
 import { CreateCarResponse } from './response';
-import { ProfanityValidationPipe } from '../../validation.pipe/profanity.validation.pipe';
 
 @ApiTags('API')
 @UseGuards(JwtAuthGuard)
@@ -20,10 +20,8 @@ import { ProfanityValidationPipe } from '../../validation.pipe/profanity.validat
 export class CarListController {
   constructor(private readonly carListService: CarListService) {}
 
-
   @ApiResponse({ status: 201, type: CreateCarResponse })
   @Post('create')
-  @UsePipes(ProfanityValidationPipe)
   async createCar(
     @Body() carDto: CarlistDTO,
     @Req() request,

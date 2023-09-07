@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDTO, UpdateUserDTO } from './dto';
-import { CarList } from '../car.list/models/carlist.model';
+
+import { CarList } from '../car.list/carlist.model';
+import { CreateUserDTO, UpdateUserDTO } from './user.dto';
+import { User } from './user.model';
+
 @Injectable()
 export class UserService {
   constructor(

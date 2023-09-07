@@ -1,5 +1,6 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum, IsNumber, IsString } from 'class-validator';
+
 import { BrandEnum } from '../enum/brand.enum';
 import { currencyEnum } from '../enum/currency.enum';
 
@@ -18,15 +19,13 @@ export class CreateCarResponse {
 
   @ApiProperty()
   @IsNumber()
-  price: number
+  price: number;
 
   @ApiProperty()
   @IsString()
   carId: string;
 
-
   @ApiProperty()
   @IsString()
   description: string;
-
 }

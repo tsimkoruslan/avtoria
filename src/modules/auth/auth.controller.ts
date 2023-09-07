@@ -1,9 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateUserDTO } from '../user/dto';
-import { UserLoginDTO } from './dto';
+import { Body, Controller, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { CreateUserDTO } from '../user/user.dto';
+import { UserLoginDTO } from './auth.dto';
+import { AuthService } from './auth.service';
 import { AuthUserResponse } from './response';
+import { LogoutGuard } from '../../guards/logout-guard';
 import { JwtAuthGuard } from '../../guards/jwt-guard';
 
 @ApiTags('API')
@@ -23,9 +25,9 @@ export class AuthController {
     return this.authService.loginUser(dto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post('test')
-  test() {
-    return true;
+  @UseGuards(JwtAuthGuard, LogoutGuard)
+  @Post('logout')
+  async logout (@Res() res: any){
+    return res.status(HttpStatus.OK).json('Logout')
   }
 }

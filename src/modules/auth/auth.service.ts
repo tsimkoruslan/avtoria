@@ -1,16 +1,23 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { CreateUserDTO } from '../user/dto';
-import { AppError } from '../../common/constans/errors';
-import { UserLoginDTO } from './dto';
+import {
+  BadRequestException,
+  Injectable,
+} from '@nestjs/common';
+import { InjectRedisClient, RedisClient } from '@webeleon/nestjs-redis';
 import * as bcrypt from 'bcrypt';
+
+import { AppError } from '../../common/constans/errors';
 import { TokenService } from '../token/token.service';
+import { CreateUserDTO } from '../user/user.dto';
+import { UserService } from '../user/user.service';
+import { UserLoginDTO } from './auth.dto';
 import { AuthUserResponse } from './response';
+
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly tokenService: TokenService,
+    @InjectRedisClient() private readonly redisClient: RedisClient,
   ) {}
 
   async registerUsers(dto: CreateUserDTO): Promise<CreateUserDTO> {
@@ -34,6 +41,7 @@ export class AuthService {
       if (!validatePassword) throw new BadRequestException(AppError.WRONG_DATA);
       const user = await this.userService.publicUser(dto.email);
       const token = await this.tokenService.generateJwtToken(user);
+       await this.redisClient.setEx(token, 10000, token);
       return { user, token };
     } catch (e) {
       throw new Error(e);

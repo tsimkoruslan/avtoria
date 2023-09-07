@@ -1,9 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './modules/app/app.module';
-import { ConfigService } from '@nestjs/config';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import { ProfanityValidationPipe } from './validation.pipe/profanity.validation.pipe';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import { AppModule } from './app.module';
 // import * as dotenv from 'dotenv'
 // import * as process from 'process';
 //
@@ -15,8 +15,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get('port');
   app.useGlobalPipes(new ValidationPipe());
-
-  app.useGlobalPipes(new ProfanityValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('Avtoria')

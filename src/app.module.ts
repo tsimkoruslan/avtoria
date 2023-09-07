@@ -1,16 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from '../user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import configurations from '../../configurations';
-import { User } from '../user/models/user.model';
-import { AuthModule } from '../auth/auth.module';
-import { TokenModule } from '../token/token.module';
-import { CarListModule } from '../car.list/car.list.module';
-import { CarList } from '../car.list/models/carlist.model';
-import { ProfanityValidationPipe } from '../../validation.pipe/profanity.validation.pipe';
+import { RedisModule } from '@webeleon/nestjs-redis';
+
+import configurations from './configurations';
+import { AuthModule } from './modules/auth/auth.module';
+import { CarListModule } from './modules/car.list/car.list.module';
+import { CarList } from './modules/car.list/carlist.model';
+import { TokenModule } from './modules/token/token.module';
+import { User } from './modules/user/user.model';
+import { UserModule } from './modules/user/user.module';
+
 @Module({
   imports: [
+    RedisModule.forRoot({
+      url: process.env.REDIS_URL,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configurations],
@@ -34,6 +39,6 @@ import { ProfanityValidationPipe } from '../../validation.pipe/profanity.validat
     AuthModule,
     TokenModule,
     CarListModule,
-  ]
+  ],
 })
 export class AppModule {}
