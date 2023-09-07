@@ -17,9 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any){
-    if (!(this.redisClient.exists(payload.user.email))){
+    if (!(this.redisClient.exists(payload.user.email))) {
       throw new UnauthorizedException()
     }
     return { ...payload.user };
-  }
-}
+}}

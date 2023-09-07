@@ -11,6 +11,7 @@ export class LogoutGuard implements CanActivate {
       const extractToken = request.headers.authorization.split(' ');
       if (extractToken[0] === 'Bearer' && extractToken[1] != '') {
         const jwtToken = extractToken[1];
+        console.log(jwtToken);
         if (!(await this.redisClient.exists(jwtToken))) {
           return false;
         } else {
